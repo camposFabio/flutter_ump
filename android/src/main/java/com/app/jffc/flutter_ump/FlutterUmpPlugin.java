@@ -1,4 +1,4 @@
-package com.app.jffc.flutter_ump;
+package app.jffc.flutter_ump;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,7 +40,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(),
-        "com.app.jffc/flutter_ump");
+        "app.jffc/flutter_ump");
     context = flutterPluginBinding.getApplicationContext();
     channel.setMethodCallHandler(this);
   }
@@ -56,7 +56,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
   // in the same class.
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel =
-        new MethodChannel(registrar.messenger(), "com.app.jffc/flutter_ump");
+        new MethodChannel(registrar.messenger(), "app.jffc/flutter_ump");
 
     channel.setMethodCallHandler(new FlutterUmpPlugin());
   }

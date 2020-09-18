@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class FlutterUmp {
-  static const platform = const MethodChannel('com.app.jffc/flutter_ump');
+  static const platform = const MethodChannel('app.jffc/flutter_ump');
 
   static Future<void> getUserConsent({String testDeviceID = ""}) async {
     try {
