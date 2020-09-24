@@ -33,10 +33,10 @@ class FlutterUmp {
 
   static Future<String> getConsentStatus() async {
     Map<int, String> consentStatus = {
-      0: 'UNKNOWN',
-      1: 'NOT_REQUIRED',
-      2: 'REQUIRED',
-      3: 'OBTAINED'
+      0: 'UNKNOWN', // Consent status is unknown
+      1: 'NOT_REQUIRED', // User consent not required.
+      2: 'REQUIRED', // User consent required but not yet obtained.
+      3: 'OBTAINED' // User consent obtained.
     };
     int status;
 
