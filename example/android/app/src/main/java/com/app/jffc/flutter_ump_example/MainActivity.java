@@ -1,4 +1,4 @@
-package app.jffc.flutter_ump_example;
+package app.jffc.ump_example;
 
 import io.flutter.embedding.android.FlutterActivity;
 

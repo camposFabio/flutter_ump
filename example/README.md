@@ -1,6 +1,6 @@
-# flutter_ump_example
+# ump_example
 
-Demonstrates how to use the flutter_ump plugin.
+Demonstrates how to use the ump plugin.
 
 ## Getting Started
 

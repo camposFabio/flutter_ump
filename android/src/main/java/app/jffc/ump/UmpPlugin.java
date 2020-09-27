@@ -1,4 +1,4 @@
-package app.jffc.flutter_ump;
+package app.jffc.ump;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,8 +24,8 @@ import com.google.android.ump.FormError;
 import com.google.android.ump.UserMessagingPlatform;
 
 
-/** FlutterUmpPlugin */
-public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
+/** UmpPlugin */
+public class UmpPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -40,7 +40,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(),
-        "app.jffc/flutter_ump");
+        "app.jffc/ump");
     context = flutterPluginBinding.getApplicationContext();
     channel.setMethodCallHandler(this);
   }
@@ -56,9 +56,9 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
   // in the same class.
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel =
-        new MethodChannel(registrar.messenger(), "app.jffc/flutter_ump");
+        new MethodChannel(registrar.messenger(), "app.jffc/ump");
 
-    channel.setMethodCallHandler(new FlutterUmpPlugin());
+    channel.setMethodCallHandler(new UmpPlugin());
   }
 
   @Override
@@ -69,7 +69,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
         final String testDeviceID = call.argument("testDeviceID");
 
 
-        getUserConsent(testDeviceID);
+        result.success(getUserConsent(testDeviceID));
         break;
       case "resetUserConsent":
         resetUserConsent();
@@ -134,15 +134,18 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
 
 
 
-  protected void getUserConsent(String testDeviceID) {
+  protected int getUserConsent(String testDeviceID) {
 
     ConsentRequestParameters params;
 
     // If receive an test Device ID
     // Force Geography for testing
 
-    if (testDeviceID != null && !testDeviceID.isEmpty()) {
 
+    if (testDeviceID != null && !testDeviceID.isEmpty()) {
+      System.out.println("***** Java getUserConsent");
+      System.out.println("***** Java testDeviceID: "+ testDeviceID);
+      
       ConsentDebugSettings debugSettings = new ConsentDebugSettings.Builder(context)
           .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
           .addTestDeviceHashedId(testDeviceID).build();
@@ -178,10 +181,11 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
             // Handle the error.
           }
         });
+        return getConsentStatus();
   }
 
   protected void resetUserConsent() {
-
+    
     consentInformation = UserMessagingPlatform.getConsentInformation(context);
 
     // Reset consent state
@@ -190,7 +194,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
   }
 
   protected int getConsentStatus() {
-    System.out.println("***** getConsentStatus");
+    
 
     consentInformation = UserMessagingPlatform.getConsentInformation(context);
 
@@ -210,7 +214,7 @@ public class FlutterUmpPlugin implements FlutterPlugin, MethodCallHandler, Activ
           public void onConsentFormLoadSuccess(ConsentForm consentForm) {
 
 
-            FlutterUmpPlugin.this.consentForm = consentForm;
+            UmpPlugin.this.consentForm = consentForm;
             if (consentInformation
                 .getConsentStatus() == ConsentInformation.ConsentStatus.REQUIRED) {
 

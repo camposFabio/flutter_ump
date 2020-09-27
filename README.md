@@ -1,4 +1,4 @@
-# flutter_ump
+# ump
 
 Flutter plugin for displaying the required GDPR Consent Message using Google User Messaging Platform (UMP. 
 
@@ -27,7 +27,7 @@ You need to register an consent form for you application on [Google Funding Choi
 
 ## Usage
 
-To use this plugin, add `flutter_ump` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
+To use this plugin, add `ump` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
 
 It's recomended to call this plugin on the application start, so include an call in the initState of your homepage:
 

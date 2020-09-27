@@ -1,4 +1,4 @@
-name: flutter_ump
+name: ump
 description: A new flutter plugin project.
 version: 0.0.1
 author:
@@ -28,8 +28,8 @@ flutter:
   plugin:
     platforms:
       android:
-        package: app.jffc.flutter_ump
-        pluginClass: FlutterUmpPlugin
+        package: app.jffc.ump
+        pluginClass: UmpPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

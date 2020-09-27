@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_ump/flutter_ump.dart';
+import 'package:ump/ump.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> getConsentStatus() async {
     String consentStatus = '';
     try {
-      consentStatus = await FlutterUmp.getConsentStatus();
+      consentStatus = await Ump.getConsentStatus();
     } on PlatformException {}
 
     setState(() {
@@ -44,13 +44,13 @@ class _MyAppState extends State<MyApp> {
     try {
       if (test) {
         // Reset user constent and send test Device ID
-        FlutterUmp.resetUserConsent();
+        Ump.resetUserConsent();
 
-        FlutterUmp.getUserConsent(
+        Ump.getUserConsent(
           testDeviceID: '<YOUR TEST DEVICE ID>',
         );
       } else
-        FlutterUmp.getUserConsent();
+        Ump.getUserConsent();
     } on PlatformException {}
 
     // If the widget was removed from the tree while the asynchronous platform

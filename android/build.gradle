@@ -1,4 +1,4 @@
-group 'app.jffc.flutter_ump'
+group 'app.jffc.ump'
 version '1.0'
 
 buildscript {
